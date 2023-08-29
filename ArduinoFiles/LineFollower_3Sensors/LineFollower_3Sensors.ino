@@ -11,6 +11,8 @@ const int PIN_analogIn_M = A2;  // Left Sensor
 const int PORT_motor_L = 1;   // Right Motor
 const int PORT_motor_R = 2;   // Left Motor
 
+const int forward_backward_multiplier = -1;  // Direction of the Motors.
+
 /// Instances
 
 AF_DCMotor motor_L(PORT_motor_L);
@@ -37,6 +39,7 @@ void setSpeed(AF_DCMotor motor, int speed) {
     speed = 255;
     Serial.println("Error: setSpeed(): speed out of bounds");
   }
+  speed = forward_backward_multiplier * speed;
 
   if(speed == 0) {
     motor.run(RELEASE);

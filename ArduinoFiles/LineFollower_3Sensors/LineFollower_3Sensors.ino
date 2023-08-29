@@ -14,6 +14,7 @@ const int PORT_motor_R = 2;   // Left Motor
 const int forward_backward_multiplier = -1;  // Direction of the Motors.
 
 const int C_black = 100;   // above is black
+const int speed_0 = 70;    // standard speed
 
 /// Instances
 
@@ -26,10 +27,16 @@ int value_R;
 int value_L;
 int value_M;
 
-int speed;
+bool black_R;
+bool black_L;
+bool black_M;
+
+int speed_L;
+int speed_R;
 bool forward;
 
-
+bool S_LineWasLeft = false;
+bool S_LineWasRight = false;
 
 /// Functions
 
@@ -54,6 +61,10 @@ void setSpeed(AF_DCMotor motor, int speed) {
   motor.setSpeed(abs(speed));
 }
 
+bool isBlack(int value) {
+  return value > C_black;
+}
+
 /// Setup
 
 void setup() {
@@ -64,7 +75,12 @@ void setup() {
   value_L = 0;
   value_M = 0;
 
-  speed = 0;
+  black_R = false;
+  black_L = false;
+  black_M = false;
+
+  speed_L = speed_0;
+  speed_R = speed_0
   forward = true;
 
   setSpeed(motor_L, 0);
@@ -86,27 +102,13 @@ void loop() {
   Serial.print("\tM: ");
   Serial.println(value_M);
 
-  /// -255 ... 255 
-  /*if(forward) {
-    if(speed < 255) {
-      setSpeed(motor_L, speed);
-      setSpeed(motor_R, speed);
-      speed = speed + 10;
-    } else {
-      forward = false;
-    }
-  } else {
-    if(speed > -255) {
-      setSpeed(motor_L, speed);
-      setSpeed(motor_R, speed);
-      speed = speed - 10;
-    } else {
-      forward = true;
-    }
-  }*/
+  setSpeed(motor_L, speed_L);
+  setSpeed(motor_R, speed_R);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
-  Serial.print("Speed: ");
-  Serial.print(speed);
+  Serial.print("Speed_L: ");
+  Serial.print(speed_L);
+  Serial.print("Speed_R: ");
+  Serial.print(speed_R);
 
-  delay(300);
+  //delay(300);
 }

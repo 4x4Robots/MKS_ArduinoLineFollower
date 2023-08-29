@@ -6,12 +6,14 @@
 
 const int PIN_analogIn_L = A0;  // Left Sensor
 const int PIN_analogIn_R = A1;  // Right Sensor
-const int PIN_analogIn_M = A2;  // Left Sensor
+const int PIN_analogIn_M = A2;  // Middle Sensor
 
 const int PORT_motor_L = 1;   // Right Motor
 const int PORT_motor_R = 2;   // Left Motor
 
 const int forward_backward_multiplier = -1;  // Direction of the Motors.
+
+const int C_black = 100;   // above is black
 
 /// Instances
 
@@ -84,7 +86,8 @@ void loop() {
   Serial.print("\tM: ");
   Serial.println(value_M);
 
-  if(forward) {
+  /// -255 ... 255 
+  /*if(forward) {
     if(speed < 255) {
       setSpeed(motor_L, speed);
       setSpeed(motor_R, speed);
@@ -100,7 +103,7 @@ void loop() {
     } else {
       forward = true;
     }
-  }
+  }*/
 
   Serial.print("Speed: ");
   Serial.print(speed);
